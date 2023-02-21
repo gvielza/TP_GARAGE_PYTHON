@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 
+import conector_bd
+
 
 
 print("hola")
@@ -37,6 +39,8 @@ def validar_credenciales():
 boton = Button(ventana, text="Iniciar sesión", command=validar_credenciales)
 boton.place(x=130, y=120)
 ventana.mainloop()
+
+conector_bd.mostrar_usuarios()
 
 
 
