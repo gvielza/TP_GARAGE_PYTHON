@@ -1,5 +1,10 @@
 import tkinter
 
+import sqlite3
+
+conexion = sqlite3.connect("garage_db")
+cursor = conexion.cursor()
+
 window = tkinter.Tk()
 window.title("garage")
 window.geometry('700x700')
@@ -7,6 +12,38 @@ window.configure(bg='#333333')
 
 frame = tkinter.Frame(bg='#333333')
 
+def buscar_movile():
+    cursor.execute("SELECT * FROM moviles WHERE patente = ?", (patente_entrada.get(),))
+    resultado = cursor.fetchone()
+    if resultado is not None:
+        print("está el auto")
+        marca_entrada.insert(0,resultado[1])
+        modelo_entrada.insert(0,resultado[2])
+        color_entrada.insert(0,resultado[3])
+        cursor.execute("SELECT * FROM movimientos WHERE patente = ?", (patente_entrada.get(),))
+        mov=cursor.fetchone()
+        if mov is not None:
+            print("si mov")
+            entrada_entrada.insert(0,mov[1])
+            salida_entrada.insert(0,mov[2])
+        else:
+            print("no esta")
+
+
+    else:
+        print("no eeeesta el auto")
+        boton_entrar.config(state="normal")
+        boton_entrar.config(bg="red")
+
+
+
+def insertar_datos():
+    cursor.execute('INSERT INTO moviles (patente, marca, modelo, color, observaciones) VALUES(?,?,?,?,?)',
+                   (patente_entrada.get(), marca_entrada.get(), modelo_entrada.get(), color_entrada.get(), ""))
+
+    cursor.execute('INSERT INTO movimientos (patente, fechahora_entrada, fechahora_salida, lugar) VALUES(?,?,?,?)',(patente_entrada.get(),entrada_entrada.get(),"",""))
+    conexion.commit()
+    window.update()
 
 
 #diseño de los textos
@@ -26,7 +63,9 @@ salida_entrada = tkinter.Entry(frame)
 pagar_boton = tkinter.Button(frame, text="Pagar", bg='#FF3399', fg="#FFFFFF", font=("Arial", 15))
 importar_boton = tkinter.Button(frame, text="Importar datos", bg='#FF3399', fg="#FFFFFF", font=("Arial", 15))
 exportar_boton = tkinter.Button(frame, text="Exportar datos", bg='#FF3399', fg="#FFFFFF", font=("Arial", 15))
-buscar_boton = tkinter.Button(frame, text="Buscar", bg='#FF3399', fg="#FFFFFF", font=("Arial", 15))
+buscar_boton = tkinter.Button(frame, text="Buscar", bg='#FF3399', fg="#FFFFFF", font=("Arial", 15),command=buscar_movile)
+
+boton_entrar = tkinter.Button(frame, text="Entrar", bg='#707B7C', fg="#FFFFFF", font=("Arial", 15),command=insertar_datos)
 
 #posicion de los textos y botones
 garage_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=25)
@@ -46,6 +85,13 @@ pagar_boton.grid(row=7, column=0, columnspan=2, pady=25)
 exportar_boton.grid(row=8, column=2, columnspan=2, pady=25)
 importar_boton.grid(row=8, column=0, columnspan=2, pady=25)
 buscar_boton.grid(row=1 , column=2, pady=20)
+
+boton_entrar.grid(row=7, column=2, columnspan=2, pady=25)
+boton_entrar.config(state="disabled")
+
+
+
+
 
 
 frame.pack()
