@@ -2,6 +2,7 @@ import tkinter
 from tkinter import messagebox
 import sqlite3
 
+
 conexion = sqlite3.connect("garage_db")
 cursor = conexion.cursor()
 
@@ -26,6 +27,8 @@ def validar_datos():
     print(resultado)
     print(usuario)
     if resultado is not None:
+        window.destroy()
+        import garage
         print("está")
     else:
         print("no eeeesta")
