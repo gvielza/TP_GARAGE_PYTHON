@@ -9,25 +9,25 @@ cursor = conexion.cursor()
 #(patente TEXT,fechahora_entrada DATETIME, fechahora_salida DATETIME, observaciones TEXT, lugar TEXT)''')
 
 #cursor.execute('INSERT INTO movimientos (patente, fechahora_entrada, fechahora_salida, lugar) VALUES(?,?,?,?)',("zrt890","22/5 16hs","23/5 14hs","garage"))
-#conexion.commit()
+#conexion.commit() 
 
 #cursor.execute('''CREATE TABLE movil
 #(patente TEXT, marca TEXT, modelo TEXT, color TEXT, observaciones TEXT)''')
 
 #cursor.execute('INSERT INTO movil (patente, marca, modelo, color, observaciones) VALUES(?,?,?,?,?)',("zrt890","toyota","corolla","gris","Se realizo el service correctamente"))
-#conexion.commit()
+#conexion.commit() 
 
 #cursor.execute('INSERT INTO usuarios (nombre, usuario, contrasena, tipo_de_usuario) VALUES(?,?,?,?)',("Franco","fs123","hola123","user"))
-#conexion.commit()
+#conexion.commit()             
 
 #cursor.execute('INSERT INTO usuarios (nombre, usuario, contrasena, tipo_de_usuario) VALUES(?,?,?,?)',("Jorge","js32","123","admin"))
-#conexion.commit()
+#conexion.commit()     
 
 #cursor.execute('''CREATE TABLE movimientos
-#(patente TEXT,fechahora_entrada DATETIME, fechahora_salida DATETIME, observaciones TEXT, estado TEXT)''')
+#(patente TEXT,fechahora_entrada DATETIME, fechahora_salida DATETIME, observaciones TEXT, estado TEXT)''')  
 
 #cursor.execute('INSERT INTO movimientos (patente, fechahora_entrada, fechahora_salida, observaciones, estado) VALUES(?,?,?,?,?)',("zrt890","22/5 16hs","23/5 14hs","El service se realizo correctamente",""))
-#conexion.commit()
+#conexion.commit() 
 
 
 #cursor.execute('DROP TABLE movimientos')
@@ -49,6 +49,7 @@ def mostrar_movimientos():
     for fila in datos:
         print(fila)
 #mostrar_movimientos()
+
 
 def mostrar_movil():
     cursor.execute("SELECT * FROM  movil")
