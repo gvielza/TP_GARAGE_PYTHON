@@ -50,7 +50,6 @@ def mostrar_movimientos():
         print(fila)
 #mostrar_movimientos()
 
-
 def mostrar_movil():
     cursor.execute("SELECT * FROM  movil")
     datos=cursor.fetchall()
